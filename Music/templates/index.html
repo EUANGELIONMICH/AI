@@ -3,14 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Recommendations</title>
+    <title>Song Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .search-container {
+            text-align: center;
+        }
+        h1 {
+            color: #1DB954;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: none;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #1DB954;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1AA34A;
+        }
+    </style>
 </head>
 <body>
-    <h1>Music Recommendations</h1>
-    <form action="/recommendations" method="POST">
-        <label for="song_title">Enter Artist Keyword:</label>
-        <input type="text" id="song_title" name="song_title" required>
-        <button type="submit">Get Recommendations</button>
-    </form>
+    <div class="search-container">
+        <h1>Rekomendasi Lagu</h1>
+        <form action="/recommendations" method="post">
+            <input type="text" id="song_title" name="song_title" placeholder="Cari Apa" required>
+            <button type="submit">Cari</button>
+        </form>
+    </div>
 </body>
 </html>

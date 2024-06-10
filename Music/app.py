@@ -11,7 +11,7 @@ def load_data(file_path):
 
 # Preprocessing
 def preprocess_data(df):
-    df['combined_features'] = df.apply(lambda row: f"{row['track_name']} {row['artist(s)_name']} {row['released_year']} {row['released_month']} {row['released_day']} {row['streams']}", axis=1)
+    df['combined_features'] = df.apply(lambda row: f"{row['track_name']} {row['artist(s)_name']} {row['artist_count']} {row['released_year']} {row['released_month']} {row['released_day']} {row['streams']}", axis=1)
     return df
 
 # Create TF-IDF Vectorizer
@@ -25,8 +25,8 @@ def calculate_cosine_similarity(tfidf_matrix):
     return cosine_similarity(tfidf_matrix, tfidf_matrix)
 
 # Function to get recommendations
-def get_recommendations(input_title, df, tfidf, tfidf_matrix):
-    input_data = {'track_name': input_title, 'artist(s)_name': '', 'released_year': '', 'released_month': '', 'released_day': '', 'streams': ''}
+def get_recommendations(input_keywords, df, tfidf, tfidf_matrix):
+    input_data = {'track_name': input_keywords, 'artist(s)_name': '', 'artist_count': '', 'released_year': '', 'released_month': '', 'released_day': '', 'streams': ''}
     input_df = pd.DataFrame([input_data])
     input_df = preprocess_data(input_df)
     input_tfidf = tfidf.transform(input_df['combined_features'])
@@ -36,7 +36,7 @@ def get_recommendations(input_title, df, tfidf, tfidf_matrix):
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:11]  # Get top 10 recommendations
     song_indices = [i[0] for i in sim_scores]
-    return df[['track_name', 'artist(s)_name']].iloc[song_indices]
+    return df[['track_name', 'artist(s)_name', 'artist_count', 'released_year', 'released_month', 'released_day', 'streams']].iloc[song_indices]
 
 @app.route('/')
 def index():
