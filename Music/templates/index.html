@@ -14,13 +14,17 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
         .search-container {
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
         h1 {
             color: #1DB954;
             margin-bottom: 20px;
+            animation: fadeInOut 5s infinite;
         }
         form {
             display: flex;
@@ -33,6 +37,7 @@
             border: none;
             border-radius: 20px;
             margin-right: 10px;
+        
         }
         button {
             padding: 10px 20px;
@@ -41,17 +46,41 @@
             border: none;
             border-radius: 20px;
             cursor: pointer;
+            animation: fadeInOut 5s infinite;
         }
         button:hover {
             background-color: #1AA34A;
         }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(29,185,84,0.3) 0%, rgba(18,18,18,0) 70%);
+            animation: move 20s linear infinite;
+            z-index: 0;
+        }
+        @keyframes move {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(-50%, -50%);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
     </style>
 </head>
 <body>
+    <div class="background"></div>
     <div class="search-container">
         <h1>Rekomendasi Lagu</h1>
         <form action="/recommendations" method="post">
-            <input type="text" id="song_title" name="song_title" placeholder="Cari Apa" required>
+            <input type="text" id="keyword" name="keyword" placeholder="Masukkan kata kunci" required>
             <button type="submit">Cari</button>
         </form>
     </div>
